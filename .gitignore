@@ -1,0 +1,13 @@
+# 服务端密钥 / 支付配置 / 玩家存档（不要提交到公开仓库）
+server/config.json
+server/pay-config.json
+server/data/
+
+# 本地日志
+*.log
+
+# 本地 IDE / Claude 配置
+.claude/settings.local.json
+
+# 部署打包产物
+server/deploy/*.tar.gz

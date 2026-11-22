@@ -4489,27 +4489,26 @@
 </RECORD>
   <RECORD>
     <code>general_13_2</code>
-    <name>皈依的匈奴头目</name>
-    <type>15</type>
+    <name>窝阔台</name>
+    <type>20</type>
     <title>0</title>
-    <kezhi>2:1|5:1|9:1</kezhi>
-    <skin>generalSkin_13</skin>
-    <hp>1000</hp>
-    <attack>300</attack>
-    <defense>300</defense>
+    <kezhi>3:1|4:1|8:1</kezhi>
+    <skin>generalSkin_26</skin>
+    <hp>1800</hp>
+    <attack>660</attack>
+    <defense>460</defense>
     <cd>4</cd>
     <mcd>4</mcd>
-    <baoji>5</baoji>
-    <attackDistance>1</attackDistance>
-    <moveDistance>4</moveDistance>
-    <recruitLevel>1</recruitLevel>
-    <money>10</money>
-    <jinbi>10</jinbi>
-    <dianka>10</dianka>
-    <coint>10</coint>
-    <price>1</price>
+    <baoji>8</baoji>
+    <attackDistance>2</attackDistance>
+    <moveDistance>5</moveDistance>
+    <recruitLevel>30</recruitLevel>
+    <money>5</money>
+    <jinbi>5</jinbi>
+    <dianka>8</dianka>
+    <coint>8</coint>
+    <price>-1</price>
     <proto>proto_1_20</proto>
-    <skill>sk_1</skill>
   </RECORD>
   <RECORD>
     <code>general_20_1</code>
@@ -4580,6 +4579,30 @@
     <price>-1</price>
     <proto>proto_1_20</proto>
 </RECORD>
+  <RECORD>
+    <code>general_20_4</code>
+    <name>张辽</name>
+    <type>20</type>
+    <title>0</title>
+    <kezhi>3:1|4:1|8:1</kezhi>
+    <skin>generalSkin_26</skin>
+    <hp>1900</hp>
+    <attack>560</attack>
+    <defense>460</defense>
+    <cd>4</cd>
+    <mcd>4</mcd>
+    <baoji>8</baoji>
+    <attackDistance>2</attackDistance>
+    <moveDistance>5</moveDistance>
+    <recruitLevel>30</recruitLevel>
+    <money>5</money>
+    <jinbi>5</jinbi>
+    <dianka>8</dianka>
+    <coint>8</coint>
+    <price>-1</price>
+    <proto>proto_1_20</proto>
+    <skill>sk_3</skill>
+  </RECORD>
 <RECORD>
     <code>general_14_0</code>
     <name>倭寇杂兵</name>

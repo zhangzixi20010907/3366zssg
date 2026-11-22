@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  # 可选：MonaServer RTMFP 对战服务器
+  # RTMFP 使用 UDP 1935（必须放行 UDP）
+  monaserver:
+    image: monaserver/monaserver
+    container_name: mona
+    restart: unless-stopped
+    ports:
+      - "1935:1935"
+      - "1935:1935/udp"
+      - "8088:80"

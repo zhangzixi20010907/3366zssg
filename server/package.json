@@ -1,0 +1,13 @@
+{
+  "name": "sanguo-qzhan-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "3366战神三国 / 三国Q战 兼容 HTTP 服务端（账号、登录、云存档）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

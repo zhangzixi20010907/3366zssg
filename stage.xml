@@ -981,4 +981,101 @@
     <general code="general_1_1" level="100" name="山贼弓手" feature="1" evolution="2"/>
     <general code="general_9_1" level="110" name="山贼大首领"/>
   </gate>
+
+  <!-- 乌林遗迹（副本 Part 12）：1-4、6-9 普通关卡；5、10 Boss 战 -->
+  <gate id="201" part="12" partName="乌林遗迹" level="1" name="乌林小径" group="乌林" ai="60" delay="4000">
+    <award soldier="" recruit="" proto="" money="3000" reverence="100" exploit="2000"/>
+    <general code="general_10_1" level="8" name="乌林斥候"/>
+    <general code="general_10_1" level="8" name="乌林斥候"/>
+    <general code="general_1_1" level="8" name="乌林弓手"/>
+    <general code="general_1_1" level="8" name="乌林弓手"/>
+    <general code="general_0_1" level="5" name="乌林弩车"/>
+  </gate>
+
+  <gate id="202" part="12" partName="乌林遗迹" level="2" name="荒废驿站" group="乌林" ai="65" delay="3800">
+    <award soldier="" recruit="" proto="" money="5000" reverence="200" exploit="3000"/>
+    <general code="general_10_1" level="12" name="乌林斥候"/>
+    <general code="general_10_1" level="12" name="乌林斥候"/>
+    <general code="general_3_1" level="12" name="乌林刀手"/>
+    <general code="general_1_1" level="12" name="乌林弓手"/>
+    <general code="general_1_1" level="12" name="乌林弓手"/>
+  </gate>
+
+  <gate id="203" part="12" partName="乌林遗迹" level="3" name="林间岗哨" group="乌林" ai="70" delay="3600">
+    <award soldier="" recruit="" proto="" money="8000" reverence="300" exploit="5000"/>
+    <general code="general_4_1" level="18" name="乌林斧手"/>
+    <general code="general_4_1" level="18" name="乌林斧手"/>
+    <general code="general_9_1" level="18" name="乌林骑手"/>
+    <general code="general_1_1" level="18" name="乌林弓手"/>
+    <general code="general_1_1" level="18" name="乌林弓手"/>
+    <general code="general_0_1" level="15" name="乌林弩车"/>
+  </gate>
+
+  <gate id="204" part="12" partName="乌林遗迹" level="4" name="乌林营地" group="乌林" ai="75" delay="3400">
+    <award soldier="" recruit="" proto="proto_2_1:2" money="12000" reverence="400" exploit="8000"/>
+    <general code="general_5_1" level="24" name="乌林锤手"/>
+    <general code="general_5_1" level="24" name="乌林锤手"/>
+    <general code="general_3_1" level="24" name="乌林刀手"/>
+    <general code="general_3_1" level="24" name="乌林刀手"/>
+    <general code="general_1_1" level="25" name="乌林精锐弓手"/>
+    <general code="general_0_1" level="20" name="乌林弩车"/>
+  </gate>
+
+  <gate id="205" part="12" partName="乌林遗迹" level="5" name="乌林守将" group="乌林" ai="85" delay="3000">
+    <award soldier="" recruit="" proto="proto_2_1:3" money="20000" reverence="1000" exploit="15000"/>
+    <general code="general_13_1" level="28" name="乌林守将" ai="100" delay="7000"/>
+    <general code="general_12_1" level="24" name="乌林长弓手"/>
+    <general code="general_10_1" level="24" name="守将亲卫"/>
+    <general code="general_1_1" level="24" name="乌林弓手"/>
+  </gate>
+
+  <gate id="206" part="12" partName="乌林遗迹" level="6" name="乱石坡" group="乌林" ai="75" delay="3400">
+    <award soldier="" recruit="" proto="proto_2_1:2" money="15000" reverence="500" exploit="10000"/>
+    <general code="general_4_1" level="30" name="乌林斧手"/>
+    <general code="general_4_1" level="30" name="乌林斧手"/>
+    <general code="general_5_1" level="30" name="乌林锤手"/>
+    <general code="general_5_1" level="30" name="乌林锤手"/>
+    <general code="general_1_1" level="30" name="乌林弓手"/>
+    <general code="general_0_1" level="30" name="乌林弩车"/>
+  </gate>
+
+  <gate id="207" part="12" partName="乌林遗迹" level="7" name="枯木栈道" group="乌林" ai="78" delay="3200">
+    <award soldier="" recruit="" proto="proto_2_1:2" money="18000" reverence="600" exploit="12000"/>
+    <general code="general_9_1" level="36" name="乌林突骑"/>
+    <general code="general_9_1" level="36" name="乌林突骑"/>
+    <general code="general_3_1" level="36" name="乌林刀手"/>
+    <general code="general_3_1" level="36" name="乌林刀手"/>
+    <general code="general_1_1" level="36" name="乌林弓手"/>
+    <general code="general_0_1" level="36" name="乌林弩车"/>
+  </gate>
+
+  <gate id="208" part="12" partName="乌林遗迹" level="8" name="遗迹入口" group="乌林" ai="80" delay="3100">
+    <award soldier="" recruit="" proto="proto_2_1:2" money="22000" reverence="700" exploit="15000"/>
+    <general code="general_5_1" level="42" name="乌林锤手"/>
+    <general code="general_5_1" level="42" name="乌林锤手"/>
+    <general code="general_4_1" level="42" name="乌林斧手"/>
+    <general code="general_4_1" level="42" name="乌林斧手"/>
+    <general code="general_9_1" level="42" name="乌林突骑"/>
+    <general code="general_0_1" level="42" name="乌林弩车"/>
+  </gate>
+
+  <gate id="209" part="12" partName="乌林遗迹" level="9" name="祭坛长廊" group="乌林" ai="82" delay="3000">
+    <award soldier="" recruit="" proto="proto_2_1:3" money="28000" reverence="900" exploit="20000"/>
+    <general code="general_4_1" level="48" name="祭坛斧卫" feature="1" evolution="2"/>
+    <general code="general_5_1" level="48" name="祭坛锤卫" feature="1" evolution="2"/>
+    <general code="general_9_1" level="48" name="祭坛突骑" feature="1" evolution="2"/>
+    <general code="general_9_1" level="48" name="祭坛突骑" feature="1" evolution="2"/>
+    <general code="general_1_1" level="48" name="祭坛弓手" feature="1" evolution="2"/>
+    <general code="general_0_1" level="45" name="祭坛弩车" feature="1" evolution="2"/>
+  </gate>
+
+  <gate id="210" part="12" partName="乌林遗迹" level="10" name="乌林之主" group="乌林" ai="90" delay="2800">
+    <award soldier="" recruit="" proto="proto_2_1:5" money="60000" reverence="5000" exploit="50000"/>
+    <general code="general_13_1" level="55" name="乌林之主" ai="100" delay="6000"/>
+    <general code="general_9_1" level="45" name="乌林死士" feature="1" evolution="3"/>
+    <general code="general_9_1" level="45" name="乌林死士" feature="1" evolution="3"/>
+    <general code="general_12_1" level="45" name="乌林神射手" feature="1" evolution="1"/>
+    <general code="general_1_1" level="45" name="乌林神射" feature="1" evolution="3"/>
+  </gate>
+
 </data>

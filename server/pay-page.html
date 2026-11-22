@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>战神三国 · 充值中心</title>
+<style>
+  :root{
+    --bg:#0b0f16;
+    --bg2:#101722;
+    --panel:#141c29;
+    --panel2:#182231;
+    --line:#263346;
+    --text:#e8eef7;
+    --muted:#8fa0b5;
+    --gold:#f0b429;
+    --gold2:#ffd166;
+    --green:#2ea44f;
+    --blue:#2f81f7;
+    --red:#f85149;
+    --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    min-height:100vh;
+    color:var(--text);
+    background:
+      radial-gradient(1100px 500px at 50% -10%, rgba(240,180,41,.14), transparent 60%),
+      radial-gradient(900px 460px at 100% 10%, rgba(47,129,247,.10), transparent 55%),
+      linear-gradient(180deg,var(--bg) 0%, var(--bg2) 100%);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 18px 48px}
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{
+    width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:24px;
+    background:linear-gradient(145deg,#3a2b12,#1a2130);
+    border:1px solid rgba(240,180,41,.35);
+    box-shadow:0 8px 24px rgba(240,180,41,.12);
+  }
+  .brand h1{font-size:20px;line-height:1.2;margin:0}
+  .brand p{margin:3px 0 0;font-size:12px;color:var(--muted);letter-spacing:.08em}
+  .badge{
+    padding:7px 12px;border-radius:999px;font-size:12px;font-weight:700;
+    background:rgba(46,164,79,.12);color:#5bd47a;border:1px solid rgba(46,164,79,.3);
+    white-space:nowrap;
+  }
+  .badge.test{background:rgba(240,180,41,.12);color:var(--gold2);border-color:rgba(240,180,41,.3)}
+  .badge.bad{background:rgba(248,81,73,.12);color:#ff8b84;border-color:rgba(248,81,73,.3)}
+
+  .card{
+    background:linear-gradient(180deg,var(--panel),var(--panel2));
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:0 24px 70px rgba(0,0,0,.38);
+  }
+  .card.pad{padding:24px}
+
+  /* 登录 */
+  .login-shell{max-width:440px;margin:6vh auto 0}
+  .login-shell .card{padding:30px}
+  .login-shell h2{margin:0 0 8px;font-size:22px}
+  .login-shell .hint{margin:0 0 22px;color:var(--muted);font-size:13px;line-height:1.7}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:13px;color:var(--muted);margin-bottom:7px}
+  .field input{
+    width:100%;padding:13px 14px;border-radius:10px;border:1px solid var(--line);
+    background:#0d141e;color:var(--text);font-size:15px;outline:none;transition:border-color .15s,box-shadow .15s;
+  }
+  .field input:focus{border-color:rgba(240,180,41,.65);box-shadow:0 0 0 3px rgba(240,180,41,.12)}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    border:none;border-radius:10px;padding:13px 18px;font-size:15px;font-weight:800;cursor:pointer;
+    transition:transform .08s,filter .15s,opacity .15s;text-decoration:none;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .btn.block{width:100%}
+  .btn.gold{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#241a05;box-shadow:0 10px 26px rgba(240,180,41,.18)}
+  .btn.ghost{background:#1b2534;color:var(--text);border:1px solid var(--line)}
+  .btn.green{background:linear-gradient(180deg,#3fbf63,var(--green));color:#fff}
+  .btn.blue{background:linear-gradient(180deg,#4b95ff,var(--blue));color:#fff}
+  .err{margin-top:14px;color:#ff8b84;font-size:13px;min-height:18px}
+  .small{font-size:12px;color:var(--muted);line-height:1.7}
+
+  /* 账号栏 */
+  .account{
+    display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+    padding:16px 20px;margin-bottom:18px;
+  }
+  .account .who{display:flex;align-items:center;gap:12px;min-width:0}
+  .avatar{
+    width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:20px;
+    background:linear-gradient(145deg,#243247,#151e2b);border:1px solid var(--line);flex:none;
+  }
+  .who b{font-size:15px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .who span{font-size:12px;color:var(--muted)}
+  .balance{display:flex;align-items:baseline;gap:8px;font-weight:800;color:var(--gold2);font-size:22px}
+  .balance small{font-size:12px;color:var(--muted);font-weight:600}
+  .head-actions{display:flex;gap:10px;align-items:center}
+
+  .section-title{display:flex;align-items:center;gap:10px;margin:24px 0 14px}
+  .section-title h2{font-size:17px;margin:0}
+  .section-title .line{height:1px;flex:1;background:linear-gradient(90deg,var(--line),transparent)}
+
+  /* 套餐 */
+  .packages{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:14px}
+  .pkg{
+    position:relative;cursor:pointer;padding:18px 16px;border-radius:14px;border:1px solid var(--line);
+    background:linear-gradient(180deg,#121a26,#0f1620);transition:border-color .15s,transform .12s,box-shadow .15s;
+    user-select:none;overflow:hidden;
+  }
+  .pkg:hover{transform:translateY(-2px);border-color:#3a4a62}
+  .pkg.sel{border-color:var(--gold);box-shadow:0 0 0 3px rgba(240,180,41,.12),0 16px 40px rgba(0,0,0,.35)}
+  .pkg .tag{
+    position:absolute;top:0;right:0;padding:4px 10px;border-bottom-left-radius:10px;
+    font-size:11px;font-weight:800;background:linear-gradient(135deg,#f0b429,#d99100);color:#231804;
+  }
+  .pkg .diamond{font-size:26px;font-weight:900;letter-spacing:-.02em}
+  .pkg .diamond em{font-style:normal;font-size:13px;color:var(--muted);font-weight:700;margin-left:4px}
+  .pkg .bonus{color:#5bd47a;font-size:12px;font-weight:700;margin-top:6px;min-height:18px}
+  .pkg .price{margin-top:14px;font-size:18px;font-weight:900;color:var(--gold2)}
+  .pkg .price small{font-size:12px;color:var(--muted);font-weight:600}
+
+  /* 支付方式 */
+  .channels{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:520px}
+  .channel{
+    display:flex;align-items:center;gap:12px;padding:16px;border-radius:12px;border:1px solid var(--line);
+    background:#0f1620;cursor:pointer;transition:border-color .15s,background .15s;user-select:none;
+  }
+  .channel:hover{border-color:#3a4a62}
+  .channel.sel{border-color:var(--gold);background:rgba(240,180,41,.06)}
+  .channel .ico{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:19px;flex:none}
+  .channel.wechat .ico{background:rgba(46,164,79,.14);color:#5bd47a}
+  .channel.alipay .ico{background:rgba(47,129,247,.14);color:#6bb0ff}
+  .channel b{font-size:14px;display:block}
+  .channel span{font-size:11px;color:var(--muted)}
+  .dot{margin-left:auto;width:18px;height:18px;border-radius:50%;border:2px solid #3a4a62;flex:none}
+  .channel.sel .dot{border-color:var(--gold);background:radial-gradient(circle at center,var(--gold) 0 38%,transparent 42%)}
+  .channel.disabled{opacity:.42;cursor:not-allowed;filter:grayscale(.5)}
+  .channel.disabled:hover{border-color:var(--line)}
+
+  .checkout{
+    display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+    margin-top:20px;padding:18px 20px;
+  }
+  .checkout .total{font-size:13px;color:var(--muted)}
+  .checkout .total b{display:block;font-size:28px;color:var(--gold2);margin-top:2px}
+  .checkout .btn{min-width:190px}
+
+  /* 订单 */
+  .orders{margin-top:8px;overflow:hidden}
+  .order-row{
+    display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;
+    padding:13px 18px;border-top:1px solid var(--line);font-size:13px;
+  }
+  .order-row:first-child{border-top:none}
+  .order-row .no{color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px}
+  .order-row .amt{font-weight:800;color:var(--gold2);white-space:nowrap}
+  .status{padding:4px 9px;border-radius:999px;font-size:11px;font-weight:800;white-space:nowrap}
+  .status.pending{background:rgba(240,180,41,.12);color:var(--gold2)}
+  .status.paid{background:rgba(46,164,79,.14);color:#5bd47a}
+  .status.credited{background:rgba(47,129,247,.14);color:#6bb0ff}
+  .status.other{background:#1b2534;color:var(--muted)}
+  .empty{padding:22px;text-align:center;color:var(--muted);font-size:13px}
+
+  /* 返回页 */
+  .return-shell{max-width:520px;margin:4vh auto 0}
+  .return-shell .card{padding:30px;text-align:center}
+  .big-ico{font-size:52px;line-height:1;margin-bottom:12px}
+  .spinner{
+    width:34px;height:34px;margin:0 auto 14px;border-radius:50%;
+    border:3px solid rgba(240,180,41,.18);border-top-color:var(--gold);animation:spin .8s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .return-shell h2{margin:0 0 10px;font-size:21px}
+  .return-shell .status-text{color:var(--muted);line-height:1.8;font-size:14px;margin:0 0 18px}
+  .kv{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px solid var(--line);font-size:13px;text-align:left}
+  .kv span:first-child{color:var(--muted)}
+  .kv span:last-child{text-align:right;word-break:break-all}
+  .notice{
+    margin:18px 0 0;padding:13px 15px;border-radius:10px;text-align:left;
+    background:rgba(240,180,41,.07);border:1px solid rgba(240,180,41,.2);color:#e8c66a;font-size:13px;line-height:1.7;
+  }
+  .notice.blue{background:rgba(47,129,247,.07);border-color:rgba(47,129,247,.22);color:#9fc5ff}
+
+  footer{margin-top:34px;text-align:center;color:#5b6b80;font-size:12px;line-height:1.8}
+
+  #toast{
+    position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);
+    background:#1b2534;border:1px solid var(--line);color:var(--text);
+    padding:12px 18px;border-radius:12px;font-size:13px;font-weight:600;
+    box-shadow:0 18px 50px rgba(0,0,0,.5);opacity:0;pointer-events:none;
+    transition:opacity .18s,transform .18s;z-index:99;max-width:90vw;
+  }
+  #toast.show{opacity:1;transform:translate(-50%,0)}
+  #toast.bad{border-color:rgba(248,81,73,.4);color:#ff9d96}
+
+  @media(max-width:560px){
+    .wrap{padding:18px 12px 40px}
+    .packages{grid-template-columns:1fr 1fr;gap:10px}
+    .pkg{padding:14px 12px}
+    .pkg .diamond{font-size:21px}
+    .pkg .price{font-size:16px}
+    .channels{grid-template-columns:1fr}
+    .checkout .btn{width:100%}
+    .order-row{grid-template-columns:1fr auto}
+    .order-row .no{grid-column:1 / -1;order:3}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">⚔️</div>
+      <div>
+        <h1 id="site-name">战神三国充值中心</h1>
+        <p>SAFE · FAST · 官方充值</p>
+      </div>
+    </div>
+    <div id="provider-badge" class="badge" hidden></div>
+  </header>
+
+  <div id="loading" class="card pad" style="text-align:center;color:var(--muted)">正在加载…</div>
+
+  <!-- 登录 -->
+  <section id="login-view" class="login-shell" hidden>
+    <div class="card">
+      <h2>登录游戏账号</h2>
+      <p class="hint">请使用进入游戏时的账号和密码登录。充值将直接发送到该账号创建的角色上。</p>
+      <form id="login-form" autocomplete="on">
+        <div class="field">
+          <label for="username">游戏账号</label>
+          <input id="username" name="username" autocomplete="username" maxlength="20" placeholder="请输入游戏账号" required>
+        </div>
+        <div class="field">
+          <label for="password">密码</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" maxlength="32" placeholder="请输入密码" required>
+        </div>
+        <button id="login-btn" class="btn gold block" type="submit">登录并充值</button>
+        <div id="login-err" class="err"></div>
+      </form>
+      <p class="small" style="margin-top:18px">账号与游戏内一致。若忘记密码，请登录游戏客户端确认。</p>
+    </div>
+  </section>
+
+  <!-- 充值 -->
+  <section id="pay-view" hidden>
+    <div class="card account">
+      <div class="who">
+        <div class="avatar">🎖️</div>
+        <div>
+          <b id="account-name">—</b>
+          <span id="role-name">角色：—</span>
+        </div>
+      </div>
+      <div class="balance"><span id="balance-num">0</span><small>点卡</small></div>
+      <div class="head-actions">
+        <a class="btn ghost" href="/pay" id="refresh-link" style="padding:9px 14px;font-size:13px">刷新</a>
+        <button class="btn ghost" id="logout-btn" style="padding:9px 14px;font-size:13px">退出</button>
+      </div>
+    </div>
+
+    <div class="section-title"><h2>选择充值套餐</h2><div class="line"></div></div>
+    <div id="packages" class="packages"></div>
+
+    <div class="section-title"><h2>选择支付方式</h2><div class="line"></div></div>
+    <div id="channels" class="channels">
+      <div class="channel wechat sel" data-channel="wechat">
+        <div class="ico">💚</div>
+        <div><b>微信支付</b><span>推荐使用微信扫码</span></div>
+        <div class="dot"></div>
+      </div>
+      <div class="channel alipay" data-channel="alipay">
+        <div class="ico">💙</div>
+        <div><b>支付宝</b><span>支持花呗 / 余额</span></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+
+    <div class="card checkout">
+      <div class="total">应付金额<b id="total-price">¥0.00</b></div>
+      <button id="pay-btn" class="btn gold" disabled>立即支付</button>
+    </div>
+
+    <div class="notice" id="after-pay-tip">
+      支付完成后，请返回游戏，点击主界面上的「商城」按钮领取点卡；若未到账，请重新登录游戏。
+    </div>
+
+    <div class="section-title"><h2>最近订单</h2><div class="line"></div></div>
+    <div id="orders" class="card orders"><div class="empty">暂无订单</div></div>
+  </section>
+
+  <!-- 支付结果 -->
+  <section id="return-view" class="return-shell" hidden>
+    <div class="card" id="return-card">
+      <div id="return-ico" class="big-ico">⏳</div>
+      <h2 id="return-title">正在确认支付结果</h2>
+      <p class="status-text" id="return-text">请稍候，不要关闭页面…</p>
+      <div id="return-detail"></div>
+      <div class="notice" id="return-tip" hidden></div>
+      <div style="margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a class="btn gold" id="back-pay" href="/pay">返回充值页</a>
+        <button class="btn ghost" id="recheck-btn" hidden>重新查询</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>充值到账说明：支付成功后进入待领取状态，游戏内点击「商城」或重新登录即可到账。</div>
+    <div>如遇支付问题，请保留订单号联系管理员。</div>
+  </footer>
+</div>
+<div id="toast"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  var state = {
+    boot: null,
+    user: null,
+    selected: null,
+    channel: 'wechat',
+    paying: false,
+    pollTimer: null,
+    pollCount: 0
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var params = new URLSearchParams(location.search);
+  var returnOrderNo = params.get('order') || params.get('orderNo') || '';
+
+  function toast(msg, bad) {
+    var t = $('toast');
+    t.textContent = msg;
+    t.className = 'show' + (bad ? ' bad' : '');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { t.className = bad ? 'bad' : ''; }, 3200);
+  }
+
+  function api(path, opts) {
+    opts = opts || {};
+    opts.credentials = 'same-origin';
+    opts.headers = Object.assign({ 'Accept': 'application/json' }, opts.headers || {});
+    if (opts.body && typeof opts.body === 'object') {
+      opts.headers['Content-Type'] = 'application/json';
+      opts.body = JSON.stringify(opts.body);
+    }
+    return fetch(path, opts).then(function (res) {
+      return res.text().then(function (text) {
+        var data = null;
+        try { data = text ? JSON.parse(text) : null; } catch (e) { /* ignore */ }
+        if (!res.ok) {
+          var msg = data && data.message ? data.message : ('请求失败（' + res.status + '）');
+          var err = new Error(msg);
+          err.status = res.status;
+          throw err;
+        }
+        return data || {};
+      });
+    });
+  }
+
+  function fmtMoney(v) { return '¥' + (Number(v) || 0).toFixed(2); }
+  function fmtNum(v) {
+    var n = Math.floor(Number(v) || 0);
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function setProviderBadge(boot) {
+    var el = $('provider-badge');
+    el.hidden = false;
+    el.className = 'badge';
+    var ready = (boot.channels || []).filter(function (c) { return c.ready; });
+    if (boot.provider === 'sandbox' && ready.length) {
+      el.textContent = '测试支付模式';
+      el.classList.add('test');
+    } else if (!boot.providerReady) {
+      el.textContent = '支付通道未配置';
+      el.classList.add('bad');
+    } else {
+      el.textContent = ready.map(function (c) { return c.name; }).join(' / ');
+    }
+  }
+
+  /* ---------------- 登录 ---------------- */
+
+  function bindLogin() {
+    var form = $('login-form');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = $('login-btn');
+      var err = $('login-err');
+      err.textContent = '';
+      btn.disabled = true;
+      btn.textContent = '登录中…';
+      api('/pay/api/login', {
+        method: 'POST',
+        body: {
+          username: $('username').value.trim(),
+          password: $('password').value
+        }
+      }).then(function (res) {
+        state.user = res.user;
+        toast('登录成功');
+        return loadBoot();
+      }).catch(function (e) {
+        err.textContent = e.message;
+      }).then(function () {
+        btn.disabled = false;
+        btn.textContent = '登录并充值';
+      });
+    });
+  }
+
+  function bindLogout() {
+    $('logout-btn').addEventListener('click', function () {
+      api('/pay/api/logout', { method: 'POST' }).then(function () {
+        state.user = null;
+        toast('已退出登录');
+        render();
+      }).catch(function (e) { toast(e.message, true); });
+    });
+  }
+
+  /* ---------------- 套餐与下单 ---------------- */
+
+  function renderPackages(packages) {
+    var box = $('packages');
+    box.innerHTML = '';
+    packages.forEach(function (p) {
+      var el = document.createElement('div');
+      el.className = 'pkg';
+      el.setAttribute('data-id', p.id);
+      el.innerHTML =
+        (p.tag ? '<div class="tag">' + escapeHtml(p.tag) + '</div>' : '') +
+        '<div class="diamond">' + fmtNum(p.dianka) + '<em>点卡</em></div>' +
+        '<div class="bonus">' + (p.bonus > 0 ? '额外赠送 ' + fmtNum(p.bonus) + ' 点卡' : '&nbsp;') + '</div>' +
+        '<div class="price">' + fmtMoney(p.rmb) + ' <small>' + escapeHtml(p.name) + '</small></div>';
+      el.addEventListener('click', function () {
+        selectPackage(p.id);
+      });
+      box.appendChild(el);
+    });
+    var hot = packages.filter(function (p) { return p.tag === '热销'; })[0];
+    var first = hot || packages[0];
+    if (first) selectPackage(first.id);
+  }
+
+  function selectPackage(id) {
+    state.selected = id;
+    var nodes = document.querySelectorAll('.pkg');
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].classList.toggle('sel', nodes[i].getAttribute('data-id') === id);
+    }
+    updateTotal();
+  }
+
+  function selectedPackage() {
+    if (!state.boot || !state.boot.packages) return null;
+    for (var i = 0; i < state.boot.packages.length; i++) {
+      if (state.boot.packages[i].id === state.selected) return state.boot.packages[i];
+    }
+    return null;
+  }
+
+  function updateTotal() {
+    var p = selectedPackage();
+    $('total-price').textContent = p ? fmtMoney(p.rmb) : '¥0.00';
+    var btn = $('pay-btn');
+    var noChannel = !state.channel;
+    btn.disabled = !p || state.paying || !state.user || noChannel;
+    btn.textContent = state.paying
+      ? '正在创建订单…'
+      : (p ? (noChannel ? '请选择支付方式' : '立即支付 ' + fmtMoney(p.rmb)) : '立即支付');
+  }
+
+  function renderChannels(channels) {
+    var map = {};
+    (channels || []).forEach(function (c) { map[c.id] = c; });
+    var nodes = document.querySelectorAll('.channel');
+    var firstReady = '';
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      var id = el.getAttribute('data-channel');
+      var c = map[id];
+      var ready = c ? c.ready !== false : false;
+      el.classList.toggle('disabled', !ready);
+      var hint = el.querySelector('span');
+      if (hint) {
+        if (!ready) hint.textContent = '暂未开通';
+        else if (id === 'wechat') hint.textContent = '推荐使用微信扫码';
+        else hint.textContent = '支持花呗 / 余额';
+      }
+      if (ready && !firstReady) firstReady = id;
+    }
+    var current = map[state.channel];
+    if (!current || current.ready === false) state.channel = firstReady;
+    for (var j = 0; j < nodes.length; j++) {
+      nodes[j].classList.toggle('sel', nodes[j].getAttribute('data-channel') === state.channel);
+    }
+    updateTotal();
+  }
+
+  function bindChannels() {
+    var nodes = document.querySelectorAll('.channel');
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].addEventListener('click', function (e) {
+        var el = e.currentTarget;
+        if (el.classList.contains('disabled')) {
+          toast('该支付方式暂未开通', true);
+          return;
+        }
+        state.channel = el.getAttribute('data-channel');
+        for (var j = 0; j < nodes.length; j++) nodes[j].classList.remove('sel');
+        el.classList.add('sel');
+        updateTotal();
+      });
+    }
+  }
+
+  function bindPay() {
+    $('pay-btn').addEventListener('click', function () {
+      var p = selectedPackage();
+      if (!p || state.paying) return;
+      if (!state.channel) {
+        toast('请选择支付方式', true);
+        return;
+      }
+      state.paying = true;
+      updateTotal();
+      api('/pay/api/order', {
+        method: 'POST',
+        body: { packageId: p.id, channel: state.channel }
+      }).then(function (res) {
+        toast('订单已创建，正在跳转支付…');
+        location.href = res.payUrl;
+      }).catch(function (e) {
+        state.paying = false;
+        updateTotal();
+        toast(e.message, true);
+      });
+    });
+  }
+
+  function renderOrders() {
+    var box = $('orders');
+    api('/pay/api/orders').then(function (res) {
+      var list = res.orders || [];
+      if (!list.length) {
+        box.innerHTML = '<div class="empty">暂无订单</div>';
+        return;
+      }
+      box.innerHTML = list.map(function (o) {
+        var cls = o.status === 'pending' ? 'pending' : (o.status === 'paid' ? 'paid' : (o.status === 'credited' ? 'credited' : 'other'));
+        var text = {
+          pending: '待支付', paid: '待领取', credited: '已到账',
+          expired: '已过期', closed: '已关闭', failed: '失败'
+        }[o.status] || o.status;
+        return '<div class="order-row">' +
+          '<div><div class="amt">' + fmtNum(o.dianka) + ' 点卡</div>' +
+          '<div class="no">' + escapeHtml(o.orderNo) + '</div></div>' +
+          '<div class="amt">' + fmtMoney(o.rmb) + '</div>' +
+          '<div class="status ' + cls + '">' + escapeHtml(text) + '</div>' +
+          '</div>';
+      }).join('');
+    }).catch(function () {
+      box.innerHTML = '<div class="empty">订单加载失败</div>';
+    });
+  }
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  /* ---------------- 支付结果页 ---------------- */
+
+  function showReturnView() {
+    $('login-view').hidden = true;
+    $('pay-view').hidden = true;
+    $('return-view').hidden = false;
+    $('loading').hidden = true;
+    if (!returnOrderNo) {
+      setReturnState('bad', '缺少订单号', '请返回充值页重新下单。', null);
+      return;
+    }
+    $('recheck-btn').hidden = false;
+    $('recheck-btn').onclick = function () {
+      var btn = $('recheck-btn');
+      btn.disabled = true;
+      api('/pay/api/order/query', { method: 'POST', body: { orderNo: returnOrderNo } })
+        .then(function () { checkOrder(true); })
+        .catch(function (e) { toast(e.message, true); })
+        .then(function () { btn.disabled = false; });
+    };
+    checkOrder(false);
+    // 每 3 次轮询主动向支付宝查一次单，异步通知丢失时也能自动补记已支付
+    state.pollTimer = setInterval(function () {
+      if (state.pollCount > 0 && state.pollCount % 3 === 0) {
+        api('/pay/api/order/query', { method: 'POST', body: { orderNo: returnOrderNo } })
+          .catch(function () {})
+          .then(function () { checkOrder(false); });
+      } else {
+        checkOrder(false);
+      }
+    }, 2200);
+  }
+
+  function setReturnState(kind, title, text, order) {
+    var ico = $('return-ico');
+    var card = $('return-card');
+    var tip = $('return-tip');
+    $('return-title').textContent = title;
+    $('return-text').textContent = text;
+    if (kind === 'pending') {
+      ico.className = 'spinner';
+      ico.textContent = '';
+      tip.hidden = true;
+    } else if (kind === 'ok') {
+      ico.className = 'big-ico';
+      ico.textContent = '✅';
+      tip.hidden = false;
+      tip.className = 'notice';
+      tip.textContent = '请返回游戏，点击主界面的「商城」按钮领取点卡；若未到账，请重新登录游戏。';
+    } else if (kind === 'done') {
+      ico.className = 'big-ico';
+      ico.textContent = '🎉';
+      tip.hidden = false;
+      tip.className = 'notice blue';
+      tip.textContent = '点卡已发放到你的游戏账号，返回游戏即可使用。';
+    } else {
+      ico.className = 'big-ico';
+      ico.textContent = '⚠️';
+      tip.hidden = true;
+    }
+    if (order) {
+      $('return-detail').innerHTML =
+        '<div class="kv"><span>订单号</span><span>' + escapeHtml(order.orderNo) + '</span></div>' +
+        '<div class="kv"><span>套餐</span><span>' + escapeHtml(order.packageName) + '</span></div>' +
+        '<div class="kv"><span>金额</span><span>' + fmtMoney(order.rmb) + '</span></div>' +
+        '<div class="kv"><span>点卡</span><span>' + fmtNum(order.dianka) + '</span></div>';
+    } else {
+      $('return-detail').innerHTML = '';
+    }
+    card.setAttribute('data-kind', kind);
+  }
+
+  function checkOrder(manual) {
+    if (!returnOrderNo) return;
+    state.pollCount = state.pollCount + 1;
+    if (manual) state.pollCount = 1;
+    api('/pay/api/order?no=' + encodeURIComponent(returnOrderNo)).then(function (res) {
+      var o = res.order;
+      if (!o) throw new Error('订单不存在');
+      if (o.status === 'paid') {
+        setReturnState('ok', '支付成功', '订单已支付，点卡正在等待你在游戏内领取。', o);
+        if (state.pollCount > 90) stopPoll();
+      } else if (o.status === 'credited') {
+        stopPoll();
+        setReturnState('done', '支付成功 · 已到账', '本次充值的点卡已经发放到你的账号。', o);
+      } else if (o.status === 'pending') {
+        if (manual) toast('暂未收到支付结果，请稍后再试');
+        setReturnState('pending', '正在确认支付结果', '如果你已完成支付，请稍候，页面会自动刷新。', o);
+      } else if (o.status === 'expired') {
+        stopPoll();
+        setReturnState('bad', '订单已过期', '请在充值页重新下单。', o);
+      } else if (o.status === 'closed') {
+        stopPoll();
+        setReturnState('bad', '订单已关闭', '你取消了本次支付。', o);
+      } else {
+        stopPoll();
+        setReturnState('bad', '支付失败', '请返回充值页重试，或联系管理员。', o);
+      }
+    }).catch(function (e) {
+      if (manual) toast(e.message, true);
+    });
+  }
+
+  function stopPoll() {
+    if (state.pollTimer) {
+      clearInterval(state.pollTimer);
+      state.pollTimer = null;
+    }
+  }
+
+  /* ---------------- 主流程 ---------------- */
+
+  function render() {
+    if (returnOrderNo) return showReturnView();
+    $('loading').hidden = true;
+    if (!state.user) {
+      $('login-view').hidden = false;
+      $('pay-view').hidden = true;
+      $('return-view').hidden = true;
+      return;
+    }
+    $('login-view').hidden = true;
+    $('pay-view').hidden = false;
+    $('return-view').hidden = true;
+
+    $('account-name').textContent = state.user.username;
+    $('role-name').textContent = '角色：' + (state.user.roleName || '尚未创建');
+    $('balance-num').textContent = fmtNum(state.user.dianka);
+
+    renderChannels(state.boot.channels || []);
+    renderPackages(state.boot.packages || []);
+    renderOrders();
+  }
+
+  function loadBoot() {
+    return api('/pay/api/bootstrap').then(function (boot) {
+      state.boot = boot;
+      state.user = boot.user || state.user;
+      $('site-name').textContent = boot.siteName || '战神三国充值中心';
+      document.title = (boot.gameName || '战神三国') + ' · 充值中心';
+      setProviderBadge(boot);
+      render();
+      return boot;
+    });
+  }
+
+  bindLogin();
+  bindLogout();
+  bindChannels();
+  bindPay();
+
+  loadBoot().catch(function (e) {
+    $('loading').hidden = false;
+    $('loading').textContent = '加载失败：' + e.message;
+    toast(e.message, true);
+  });
+})();
+</script>
+</body>
+</html>
